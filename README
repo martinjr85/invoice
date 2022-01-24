@@ -1,1 +1,6 @@
 Simple contract and invoice API that leverages Spring Data REST
+*Contains 2 specialized endpoints for invoices:
+**One for creating a new invoice, which contains some validation
+**Another that voids an existing invoice and allows the user to add more invoices if the contract was previously completed
+
+See data-model.jpeg for the data model representation.
