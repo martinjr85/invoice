@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 
-import javax.swing.text.NumberFormatter;
 import javax.transaction.Transactional;
 import java.nio.charset.StandardCharsets;
 import java.text.NumberFormat;
@@ -37,9 +36,7 @@ public class InvoiceController {
         }
 
         Optional<Contract> possibleContract = contractRepository.findById(invoice.getContractId());
-        if (possibleContract.isEmpty()) {
-            throw new EntityNotFoundException("Contract " + invoice.getContractId());
-        }
+        validateExistingContract(possibleContract, invoice.getContractId());
 
         Contract contract = possibleContract.get();
         UUID contractId = contract.getContractId();
@@ -53,6 +50,37 @@ public class InvoiceController {
         }
 
         double newInvoiceTotal = existingContractTotal + invoice.getValue();
+        validateInvoiceAmount(existingContractTotal, newInvoiceTotal, invoice, contract);
+        log.info("New invoice total is {}", newInvoiceTotal);
+
+        Invoice savedInvoice = invoiceRepository.save(invoice);
+
+        if (newInvoiceTotal == contract.getAmount()) {
+            log.info("Contract fulfilled...setting status to Completed");
+            contract.setStatus(Status.Completed);
+        }
+        contractRepository.save(contract);
+
+        return ResponseEntity.ok(savedInvoice);
+    }
+
+    private void validateExistingContract(Optional<Contract> possibleContract, UUID contractId) {
+        if (possibleContract.isEmpty()) {
+            throw new EntityNotFoundException("Contract " + contractId);
+        }
+        if(possibleContract.get().getStatus() == Status.Completed) {
+            String error = "Unable to add more invoices to this contract since it has been completed";
+            throw HttpClientErrorException.create(
+                    HttpStatus.BAD_REQUEST,
+                    "Contract completed",
+                    null,
+                    error.getBytes(),
+                    StandardCharsets.UTF_8
+            );
+        }
+    }
+
+    private void validateInvoiceAmount(double existingContractTotal, double newInvoiceTotal, Invoice invoice, Contract contract) {
         if (newInvoiceTotal > contract.getAmount()) {
             String allowableAmount = NumberFormat.getCurrencyInstance().format(contract.getAmount() - existingContractTotal);
             String error = "Invoice amount will exceed previously met contract amount.  "
@@ -65,15 +93,5 @@ public class InvoiceController {
                     StandardCharsets.UTF_8
             );
         }
-        log.info("New invoice total is {}", newInvoiceTotal);
-        Invoice savedInvoice = invoiceRepository.save(invoice);
-
-        if (newInvoiceTotal == contract.getAmount()) {
-            log.info("Contract fulfilled...setting status to Completed");
-            contract.setStatus(Status.Completed);
-        }
-        contractRepository.save(contract);
-
-        return ResponseEntity.ok(savedInvoice);
     }
 }

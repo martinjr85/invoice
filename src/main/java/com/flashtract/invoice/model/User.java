@@ -13,11 +13,6 @@ import java.util.UUID;
 @Data
 public class User {
 
-    private enum UserType {
-        Client,
-        Vendor
-    }
-
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")

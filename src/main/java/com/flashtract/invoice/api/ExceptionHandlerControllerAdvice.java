@@ -5,7 +5,6 @@ import com.flashtract.invoice.model.InvoiceError;
 import com.flashtract.invoice.model.RequestValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

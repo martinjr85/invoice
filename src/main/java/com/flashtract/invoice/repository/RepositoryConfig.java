@@ -1,6 +1,7 @@
 package com.flashtract.invoice.repository;
 
 import com.flashtract.invoice.model.Invoice;
+import com.flashtract.invoice.model.validation.ContractUserValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 public class RepositoryConfig implements RepositoryRestConfigurer {
 
     private final Validator validator;
+    private final ContractUserValidator contractUserValidator;
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
@@ -28,7 +30,6 @@ public class RepositoryConfig implements RepositoryRestConfigurer {
     @Override
     public void configureValidatingRepositoryEventListener(ValidatingRepositoryEventListener validatingRepositoryEventListener) {
         validatingRepositoryEventListener.addValidator("beforeCreate", validator);
-        validatingRepositoryEventListener.addValidator("beforeSave", validator);
-
+        validatingRepositoryEventListener.addValidator("beforeCreate", contractUserValidator);
     }
 }
