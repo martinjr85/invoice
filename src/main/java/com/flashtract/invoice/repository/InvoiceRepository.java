@@ -9,6 +9,6 @@ import java.util.UUID;
 
 @RepositoryRestResource
 public interface InvoiceRepository extends JpaRepository<Invoice, UUID> {
-    @Query("select sum(value) as contractTotal from Invoice where contractId=:contractId group by contractId")
+    @Query("select sum(value) as contractTotal from Invoice where contractId=:contractId and status!='Void' group by contractId")
     Double sumValueByContractId(UUID contractId);
 }
