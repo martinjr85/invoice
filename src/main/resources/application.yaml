@@ -1,0 +1,13 @@
+
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/flashtract
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+  data:
+    jpa:
+      repositories:
+        bootstrap_mode: default
