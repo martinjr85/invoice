@@ -1,6 +1,8 @@
 package com.flashtract.invoice.api;
 
 import com.flashtract.invoice.model.*;
+import com.flashtract.invoice.model.exception.EntityNotFoundException;
+import com.flashtract.invoice.model.exception.RequestValidationException;
 import com.flashtract.invoice.repository.ContractRepository;
 import com.flashtract.invoice.repository.InvoiceRepository;
 import com.flashtract.invoice.service.ContractService;

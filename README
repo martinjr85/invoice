@@ -4,3 +4,5 @@ Simple contract and invoice API that leverages Spring Data REST
 **Another that voids an existing invoice and allows the user to add more invoices if the contract was previously completed
 
 See data-model.jpeg for the data model representation.
+
+See Flashtract.postman_collection.json for a sample collection of requests.

@@ -1,9 +1,7 @@
 package com.flashtract.invoice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -17,6 +15,9 @@ import java.util.UUID;
 @Entity
 @Table(name = "contract")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Contract {
 
     @Id

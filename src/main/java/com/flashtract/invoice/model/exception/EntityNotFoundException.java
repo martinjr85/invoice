@@ -1,4 +1,4 @@
-package com.flashtract.invoice.model;
+package com.flashtract.invoice.model.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

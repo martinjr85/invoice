@@ -1,7 +1,7 @@
 package com.flashtract.invoice.service;
 
 import com.flashtract.invoice.model.Contract;
-import com.flashtract.invoice.model.EntityNotFoundException;
+import com.flashtract.invoice.model.exception.EntityNotFoundException;
 import com.flashtract.invoice.repository.ContractRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

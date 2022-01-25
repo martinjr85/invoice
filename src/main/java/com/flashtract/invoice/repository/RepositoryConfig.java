@@ -30,6 +30,9 @@ public class RepositoryConfig implements RepositoryRestConfigurer {
     @Override
     public void configureValidatingRepositoryEventListener(ValidatingRepositoryEventListener validatingRepositoryEventListener) {
         validatingRepositoryEventListener.addValidator("beforeCreate", validator);
+        validatingRepositoryEventListener.addValidator("beforeSave", validator);
         validatingRepositoryEventListener.addValidator("beforeCreate", contractUserValidator);
+        validatingRepositoryEventListener.addValidator("beforeSave", contractUserValidator);
+
     }
 }

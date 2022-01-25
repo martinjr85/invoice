@@ -1,8 +1,8 @@
-package com.flashtract.invoice.api;
+package com.flashtract.invoice.advice;
 
-import com.flashtract.invoice.model.EntityNotFoundException;
+import com.flashtract.invoice.model.exception.EntityNotFoundException;
 import com.flashtract.invoice.model.InvoiceError;
-import com.flashtract.invoice.model.RequestValidationException;
+import com.flashtract.invoice.model.exception.RequestValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @ControllerAdvice
 @Slf4j
-public class ExceptionHandlerControllerAdvice extends ResponseEntityExceptionHandler {
+public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({ RequestValidationException.class })
     public ResponseEntity<InvoiceError> handleRequestValidationException(RequestValidationException exception) {

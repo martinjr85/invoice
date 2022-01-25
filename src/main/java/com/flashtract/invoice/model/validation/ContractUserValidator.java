@@ -7,6 +7,7 @@ import com.flashtract.invoice.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -28,6 +29,9 @@ public class ContractUserValidator implements Validator {
     public void validate(Object target, Errors errors) {
         if (target != null && target instanceof Contract) {
             Contract contract = (Contract) target;
+            if (ObjectUtils.isEmpty(contract.getUserId())) {
+                return;
+            }
             Optional<User> possibleUser = userRepository.findById(contract.getUserId());
             if (possibleUser.isEmpty()) {
                 String error = "User ID " + contract.getUserId() + " not found";

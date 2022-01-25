@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:db;
+    username: sa
+    password: sa
+  jpa:
+    hibernate:
+      ddl-auto: update
+  data:
+    jpa:
+      repositories:
+        bootstrap_mode: default

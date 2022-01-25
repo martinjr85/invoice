@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "b1a05153-395e-4c93-80a1-026fb1a0072d",
+		"name": "Flashtract",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create users and assign contract",
+			"item": [
+				{
+					"name": "Create Client User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"jim\",\n    \"userType\": \"Client\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Vendor User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"joe\",\n    \"userType\": \"Vendor\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Contract",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"foo barred contract\",\n    \"amount\": 100.0,\n    \"userId\": \"2ea1440e-28a7-44d7-94c8-c252310f81b4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/contracts",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contracts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Invoice",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"contractId\": \"335964c8-dd28-4b83-b238-f261aa1f8a4a\",\n    \"value\": 98.5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/invoices",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Void Invoice",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/invoices/83d97515-3ba0-49ea-8f01-53caeec982f7/void",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"invoices",
+								"83d97515-3ba0-49ea-8f01-53caeec982f7",
+								"void"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Data",
+			"item": [
+				{
+					"name": "Contracts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/contracts/335964c8-dd28-4b83-b238-f261aa1f8a4a",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contracts",
+								"335964c8-dd28-4b83-b238-f261aa1f8a4a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contract Invoices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/contracts/335964c8-dd28-4b83-b238-f261aa1f8a4a/invoices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contracts",
+								"335964c8-dd28-4b83-b238-f261aa1f8a4a",
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
